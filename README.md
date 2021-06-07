@@ -12,19 +12,29 @@ Aqui você vai encontrar os detalhes de como estruturar o desenvolvimento do seu
 ---
 # Sumário
 
+- [Boas vindas ao repositório do projeto de Algorithms!](#boas-vindas-ao-repositório-do-projeto-de-algorithms)
+- [Sumário](#sumário)
 - [Habilidades](#habilidades)
-- [Entregáveis](#entregáveis)
+  - [Entregáveis](#entregáveis)
+    - [⚠️ É importante que seus arquivos tenham exatamente estes nomes! ⚠️](#️-é-importante-que-seus-arquivos-tenham-exatamente-estes-nomes-️)
   - [O que deverá ser desenvolvido](#o-que-deverá-ser-desenvolvido)
   - [Desenvolvimento](#desenvolvimento)
-  - [Data de Entrega](#data-de-entrega)
-- [Instruções para entregar seu projeto](#instruções-para-entregar-seu-projeto)
-  - [Antes de começar a desenvolver](#antes-de-começar-a-desenvolver)
-  - [Durante o desenvolvimento](#durante-o-desenvolvimento)
-  - [Como desenvolver](#como-desenvolver)
-    - [Linter](#linter)
-    - [Testes](#testes)
-- [Requisitos do projeto](#requisitos-do-projeto)
-  - [Lista de requisitos](#lista-de-requisitos)
+    - [Data de Entrega](#data-de-entrega)
+  - [Instruções para entregar seu projeto:](#instruções-para-entregar-seu-projeto)
+    - [ANTES DE COMEÇAR A DESENVOLVER:](#antes-de-começar-a-desenvolver)
+    - [Durante o desenvolvimento](#durante-o-desenvolvimento)
+  - [Linter](#linter)
+  - [Testes](#testes)
+  - [Requisitos do projeto](#requisitos-do-projeto)
+      - [1 - Número de estudantes estudando no mesmo horário (Algoritmo de busca)](#1---número-de-estudantes-estudando-no-mesmo-horário-algoritmo-de-busca)
+      - [2 - Palíndromos (Recursividade)](#2---palíndromos-recursividade)
+      - [3 - Anagramas (Algoritmo de ordenação)](#3---anagramas-algoritmo-de-ordenação)
+    - [Requisitos bônus:](#requisitos-bônus)
+      - [4 - Encontrando números repetidos (Algoritmo de busca)](#4---encontrando-números-repetidos-algoritmo-de-busca)
+      - [5 - Palíndromos (Iteratividade)](#5---palíndromos-iteratividade)
+    - [Depois de terminar o desenvolvimento](#depois-de-terminar-o-desenvolvimento)
+    - [Revisando um pull request](#revisando-um-pull-request)
+- [Avisos Finais](#avisos-finais)
 
     `Requisitos obrigatórios:`
     - [1 - Número de estudantes estudando no mesmo horário (Algoritmo de busca)](#1---número-de-estudantes-estudando-no-mesmo-horário-algoritmo-de-busca)
@@ -261,7 +271,7 @@ Você trabalha na maior empresa de educação do Brasil. Um certo dia, sua/seu `
 
 Toda vez que uma pessoa estudante abre o sistema, é cadastrado no banco de dados o horário de entrada (`start_time`). Da mesma forma funciona quando o estudante sai do sistema, é cadastrado no banco de dados o horário de saída (`end_time`).
 
-Seu trabalho é descobrir qual o melhor horário para disponibilizar os conteúdos. Para achar o horário, utilize `força bruta`. Ou seja, para achar o melhor horário, passe valores diferentes para a variável `target_time`, analisando o retorno da função.
+Seu trabalho é descobrir qual o melhor horário para disponibilizar os conteúdos. Para achar o horário, será utilizada `força bruta`. Ou seja, para achar o melhor horário, a função que você desenvolver será chamada várias vezes com valores diferentes para a variável `target_time`, e serão analisados os retornos da função.
 
 _Dica:_ Quando vou saber qual o melhor horário? Quando o contador retornado pela função for o maior.
 
@@ -274,33 +284,13 @@ _Dica:_ Quando vou saber qual o melhor horário? Quando o contador retornado pel
 start_time = [2, 1, 2, 1, 4, 4]
 end_time   = [2, 2, 3, 5, 5, 5]
 
-target_time = 5  # saída: 3, pois o quarto, o quinto e o sexto estudante estavam estudando nesse horário
-target_time = 4  # saída: 3, pois o quarto, o quinto e o sexto estudante estavam estudando nesse horário ou em um horário em que o 4 está no meio (no caso do quarto estudante)
-target_time = 3  # saída: 2, pois o terceiro e o quarto estudante estavam estudando nesse horário ou em um horário em que o 3 está no meio (no caso do quarto estudante)
-target_time = 2  # saída: 4, pois o primeiro, o segundo, o terceiro e o quarto estudante estavam estudando nesse horário ou em um horário em que o 2 está no meio
-target_time = 1  # saída: 2, pois o segundo e o quarto estudante estavam estudando nesse horário
+target_time = 5  # saída: 3, pois a quarta, a quinta e a sexta pessoa estudante ainda estavam estudando nesse horário.
+target_time = 4  # saída: 3, pois a quinta e a sexta pessoa estudante começaram a estudar nesse horário e a quarta ainda estava estudando.
+target_time = 3  # saída: 2, pois a terceira e a quarta pessoa estudante ainda estavam estudando nesse horário.
+target_time = 2  # saída: 4, pois a primeira, a segunda, a terceira e a quarta pessoa estudante estavam estudando nesse horário.
+target_time = 1  # saída: 2, pois a segunda e a quarta pessoa estudante estavam estudando nesse horário.
 
-Para esse exemplo, julgue que o melhor horário é o `2`
-```
-
-O índice `0` da lista `start_time` e o índice `0` da lista `end_time` são pertencentes **à mesma pessoa usuária**. Ou seja, o índice `0` da lista `start_time` e `end_time` são os horários de início e termino do estudo de uma pessoa usuária. O índice `1` da lista `start_time` e `end_time` são os horários de início e termino de estudos de outra pessoa usuária e por aí vai.
-
-Caso mais de um `target_time` tenham empatado com a maior saída, o melhor horário é entre os horários empatados. Exemplo:
-
-```md
-# Nos arrays temos 4 estudantes
-
-# estudante   1  2  3  4
-start_time = [4, 1, 3, 2]
-end_time   = [4, 3, 4, 5]
-
-target_time = 5  # saída: 1, pois só o estudante do último índice estudou até 5
-target_time = 4  # saída: 3, pois o primeiro estudante, o segundo e o último estudaram no horário de 4 ou em um horário que o 4 está no meio (no caso do último estudante)
-target_time = 3  # saída: 3, pois o segundo estudante, o terceiro e o último estudaram no horário de 3 ou em um horário que o 3 está no meio (no caso do último estudante)
-target_time = 2  # saída: 2, pois o segundo e o último estudante estudaram no horário de 2 ou em um horário que o 2 está no meio (no caso do segundo estudante)
-target_time = 1  # saída: 1, pois só o segundo estudante estudou no horário 1 (no caso começou no horário 1)
-
-Para esse exemplo, julgue que o melhor horário é entre `3` e `4`
+Para esse exemplo, depois de rodar a função para todos esses `target_times`, julgamos que o melhor horário é o `2`, pois esse retornou `4`, já que 4 estudantes estavam presentes nesse horário!
 ```
 
 - Este requisito será testado executando 10.000 vezes sobre uma mesma entrada. Tais execuções, **no avaliador**, devem acontecer integralmente em menos de 0.02 segundos. O tempo de execução do código na sua máquina pode variar em relação ao avaliador, então é importante levar somente ele em consideração.
