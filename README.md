@@ -273,8 +273,6 @@ Toda vez que uma pessoa estudante abre o sistema, é cadastrado no banco de dado
 
 Seu trabalho é descobrir qual o melhor horário para disponibilizar os conteúdos. Para achar o horário, será utilizada `força bruta`. Ou seja, para achar o melhor horário, a função que você desenvolver será chamada várias vezes com valores diferentes para a variável `target_time`, e serão analisados os retornos da função.
 
-_Dica:_ Quando vou saber qual o melhor horário? Quando o contador retornado pela função for o maior.
-
 **Exemplo:**
 
 ```md
